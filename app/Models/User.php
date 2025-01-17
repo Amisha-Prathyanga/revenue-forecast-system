@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'usertype',
     ];
 
     /**
@@ -44,5 +45,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relationship with Customer.
+     * A user (accMngr) can manage multiple customers.
+     */
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'accMngr_id');
+    }
+
+    /**
+     * Relationship with CustomerOpportunity.
+     * A user (accMngr) can create multiple customer opportunities.
+     */
+    public function customerOpportunities()
+    {
+        return $this->hasMany(CustomerOpportunity::class, 'accMngr_id');
+    }
+
+    /**
+     * Scope a query to filter users by usertype.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $type
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfType($query, string $type)
+    {
+        return $query->where('usertype', $type);
     }
 }
