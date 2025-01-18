@@ -14,8 +14,7 @@
                 <li class="active"><a href="index.html"> <i class="icon-home"></i>Home </a></li>
                 <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Customers</a>
                   <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                    <li><a href="#">View Concessions</a></li>
-                    <li><a href="#">Add Concession</a></li>
+                    <li><a href="{{ url('/customers') }}">Customers</a></li>
                   </ul>
                 </li>
                 <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Category</a>

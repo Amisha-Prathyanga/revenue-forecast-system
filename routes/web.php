@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -23,3 +24,10 @@ require __DIR__.'/auth.php';
 route::get('supervisor/dashboard', [HomeController::class, 'index']) ->
 middleware(['auth', 'supervisor']);
 ;
+
+//Customers
+Route::get('/customers', [CustomerController::class, 'index']);
+Route::post('/customer_form', [CustomerController::class, 'store'])->name('data.customer_form');
+Route::post('/editCustomer', [CustomerController::class, 'edit']);
+Route::post('/updateCustomer', [CustomerController::class, 'update']);
+Route::post('/deleteCustomer', [CustomerController::class, 'delete']);
