@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -24,6 +26,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/editCustomer', [CustomerController::class, 'edit']);
     Route::post('/updateCustomer', [CustomerController::class, 'update']);
     Route::post('/deleteCustomer', [CustomerController::class, 'destroy']);
+
+    //Category
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::post('/category_form', [CategoryController::class, 'store'])->name('data.category_form');
+    Route::post('/editCategory', [CategoryController::class, 'edit']);
+    Route::post('/updateCategory', [CategoryController::class, 'update']);
+    Route::post('/deleteCategory', [CategoryController::class, 'destroy']);
+
+    //Sub Category
+    Route::get('/subCategories', [SubCategoryController::class, 'index']);
+    Route::post('/subCategory_form', [SubCategoryController::class, 'store'])->name('data.subCategory_form');
+    Route::post('/editSubCategory', [SubCategoryController::class, 'edit']);
+    Route::post('/updateSubCategory', [SubCategoryController::class, 'update']);
+    Route::post('/deleteSubCategory', [SubCategoryController::class, 'destroy']);
 });
 
 require __DIR__.'/auth.php';

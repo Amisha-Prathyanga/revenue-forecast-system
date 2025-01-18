@@ -28,8 +28,8 @@
                 </li>
                 <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Category</a>
                   <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Sub Categories</a></li>
+                    <li><a href="{{ url('/categories') }}">Categories</a></li>
+                    <li><a href="{{ url('/subCategories') }}">Sub Categories</a></li>
                   </ul>
                 </li>
                 <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Customer Opportunity</a>
