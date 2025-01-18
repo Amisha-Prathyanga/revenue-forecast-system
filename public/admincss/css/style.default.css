@@ -3468,3 +3468,28 @@ pre code {
   background: #2d3035;
   border-color: #34373d;
 }
+
+
+/* Style the logout button */
+.logout-btn {
+  background-color: #2d3035; /* Match the current background color */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Add hover effect */
+.logout-btn:hover {
+  background-color: #4a4e54; /* Slightly lighter background on hover */
+  transform: scale(1.05); /* Slight scale-up effect */
+}
+
+/* Position logout button to the right */
+.logout {
+  margin-left: auto;
+}
+

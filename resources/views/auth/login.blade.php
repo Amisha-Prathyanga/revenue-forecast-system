@@ -44,4 +44,21 @@
             </x-primary-button>
         </div>
     </form>
+
+    <!-- Register Link -->
+    @if (Route::has('register'))
+    <a
+        href="{{ route('register') }}"
+        class="absolute top-0 right-0 mt-4 mr-8 rounded-md px-3 py-2 text-white bg-[rgb(31,41,55)] ring-1 ring-transparent transition hover:bg-[rgb(31,41,55)]/90 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-[rgb(31,41,55)] dark:text-white dark:hover:bg-[rgb(31,41,55)]/80 z-10"
+        style="background-color: rgb(31, 41, 55); color: white;"
+    >
+        Register
+    </a>
+    @endif
+
+
+
+
+
+   
 </x-guest-layout>

@@ -30,4 +30,4 @@ Route::get('/customers', [CustomerController::class, 'index']);
 Route::post('/customer_form', [CustomerController::class, 'store'])->name('data.customer_form');
 Route::post('/editCustomer', [CustomerController::class, 'edit']);
 Route::post('/updateCustomer', [CustomerController::class, 'update']);
-Route::post('/deleteCustomer', [CustomerController::class, 'delete']);
+Route::post('/deleteCustomer', [CustomerController::class, 'destroy']);

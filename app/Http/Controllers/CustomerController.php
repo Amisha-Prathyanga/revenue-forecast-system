@@ -6,13 +6,30 @@ use App\Models\Customer;
 
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB; 
 
 class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::with('accountManager')->paginate(10); // Fetch customers with their account managers
-        return view('customers.customers', compact('customers'));
+         // Get the logged-in user
+    $user = auth()->user();
+    
+    // Check if the logged-in user is an Account Manager
+    if ($user->usertype === 'accMngr') {
+        // Fetch only the customers added by the logged-in Account Manager
+        $customers = Customer::with('accountManager')
+                             ->where('status', 1)
+                             ->where('accMngr_id', $user->id) // Filter by the logged-in user's ID
+                             ->paginate(10);
+    } else {
+        // Supervisors can see all customers
+        $customers = Customer::with('accountManager')
+                             ->where('status', 1)
+                             ->paginate(10);
+    }
+
+    return view('customers.customers', compact('customers'));
 
     }
 
@@ -41,8 +58,8 @@ class CustomerController extends Controller
 
     public function edit(Request $req)
     {
-        $bankCharges = BankCharges::find($req->id);
-        return response($bankCharges);
+        $customers = Customer::find($req->id);
+        return response($customers);
     }
 
     public function update(Request $req)
@@ -50,24 +67,23 @@ class CustomerController extends Controller
         date_default_timezone_set("Asia/colombo");
         $todayDate = date('Y-m-d h:i:sa');
 
-        $bnkCharge = BankCharges::find($req->edit_bankCharge_id);
+        $customer = Customer::find($req->edit_customer_id);
 
-        $amount = str_replace(',', '', $req->editAmount);
-        $amount = floatval($amount);
+        $customer->client_name = $req->editCusName;
+        $customer->industry_sector = $req->editCusIndustry;
+        $customer->controlling_ministry = $req->editCusMinistry;
+        $customer->ministry_contact = $req->editCusMinContact;
+        $customer->key_client_contact_name = $req->editCusContact;
+        $customer->key_client_contact_designation = $req->editCusDesignation;
+        $customer->key_projects_or_sales_activity = $req->editCusProjects;
+        $customer->account_servicing_persons_initials = $req->editCusAccPersIni;
 
-        $bnkCharge->date = $req->editDate;
-        $bnkCharge->bank_id = $req->editBank;
-        $bnkCharge->reference_number = $req->editRefNo;
-        $bnkCharge->charges_id = $req->editChrgType;
-        $bnkCharge->description = $req->editDes;
-        $bnkCharge->amount = $amount;
-
-        $saved = $bnkCharge->save();
+        $saved = $customer->save();
 
         if($saved){
 
-            $items = BankCharges::where('status', 1)->orderBy('id')->paginate(10);
-            Alert::success('Action Success', 'The Bank Charge has been Updated Successfully!');
+            $items = Customer::with('accountManager')->where('status', 1)->orderBy('id')->paginate(10);
+            Alert::success('Action Success', 'The Customer has been Updated Successfully!');
             return response($items);
         }
     }
@@ -77,12 +93,12 @@ class CustomerController extends Controller
         date_default_timezone_set("Asia/colombo");
         $todayDate = date('Y-m-d h:i:sa');
 
-        $deleteBankCharge = DB::table('bank_charges')
+        $deleteCustomer= DB::table('customers')
         ->where('id', '=', $req->id)
         ->update([
             'status' => 0
         ]);
 
-        return response($deleteBankCharge);
+        return response($deleteCustomer);
     }
 }

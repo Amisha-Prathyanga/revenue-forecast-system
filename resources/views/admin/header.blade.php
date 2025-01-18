@@ -14,12 +14,12 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
           
          
-            <!-- Log out               -->
+            <!-- Log out-->
             <div class="list-inline-item logout"> 
             <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <input type="submit" value="Logout">
+                    <input type="submit" value="Logout" class="logout-btn">
             </form>
           </div>
         </div>
