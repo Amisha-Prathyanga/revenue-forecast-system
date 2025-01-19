@@ -17,6 +17,7 @@ function editSubCategory(id) {
             // swal_alert("success", "Saved!", "New Route Saved Successfully.");
             $("#edit_subCategory_id").val(data["id"]);
             $("#editSubCatName").val(data["name"]);
+            $("#editCategoryName").val(data["category_name"]);
 
             $("#deleteSubCategoryButton").attr("data-id", data["id"]);
 

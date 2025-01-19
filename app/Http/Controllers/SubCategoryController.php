@@ -39,8 +39,19 @@ class SubCategoryController extends Controller
 
     public function edit(Request $req)
     {
-        $subCategories = SubCategory::find($req->id);
-        return response($subCategories);
+        $subCategories = SubCategory::with('category')->find($req->id);
+
+        // Check if the SubCategory exists
+        if ($subCategories) {
+            return response()->json([
+                'id' => $subCategories->id,
+                'name' => $subCategories->name,
+                'category_name' => $subCategories->category ? $subCategories->category->name : 'N/A', // Return category name
+            ]);
+        }
+
+        // If not found, return an error message
+        return response()->json(['error' => 'SubCategory not found'], 404);
     }
 
     public function update(Request $req)

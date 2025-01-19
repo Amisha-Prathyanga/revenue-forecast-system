@@ -21,29 +21,29 @@
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
                 <li class="active"><a href="{{ url('/dashboard') }}"> <i class="icon-home"></i>Home </a></li>
-                <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Customers</a>
-                  <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="#customersDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Customers</a>
+                  <ul id="customersDropdown" class="collapse list-unstyled ">
                     <li><a href="{{ url('/customers') }}">Customers</a></li>
                   </ul>
                 </li>
-                <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Category</a>
-                  <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="#categoryDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Category</a>
+                  <ul id="categoryDropdown" class="collapse list-unstyled ">
                     <li><a href="{{ url('/categories') }}">Categories</a></li>
                     <li><a href="{{ url('/subCategories') }}">Sub Categories</a></li>
                   </ul>
                 </li>
-                <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Customer Opportunity</a>
-                  <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                    <li><a href="#">View Orders</a></li>
-                    <li><a href="#">Add Order</a></li>
+                <li><a href="#customerOpportunityDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Customer Opportunity</a>
+                  <ul id="customerOpportunityDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ url('/cusOpportunities') }}">Customer Opportunities</a></li>
                   </ul>
                 </li>
-                <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Reports</a>
-                  <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                    <li><a href="#">View Orders</a></li>
-                    <li><a href="#">Add Order</a></li>
+                <li><a href="#reportsDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Reports</a>
+                  <ul id="reportsDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ url('/sales-projection') }}">Sales Projection Report</a></li>
                   </ul>
                 </li>
         </ul>
       </nav>
       <!-- Sidebar Navigation end-->
+  
+    

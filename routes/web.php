@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\CusOpportunityController;
+use App\Http\Controllers\SalesProjectionController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -40,6 +42,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/editSubCategory', [SubCategoryController::class, 'edit']);
     Route::post('/updateSubCategory', [SubCategoryController::class, 'update']);
     Route::post('/deleteSubCategory', [SubCategoryController::class, 'destroy']);
+
+    //Customer Opportunities
+    Route::get('/cusOpportunities', [CusOpportunityController::class, 'index']);
+    Route::post('/cusOpportunity_form', [CusOpportunityController::class, 'store'])->name('data.cusOpportunity_form');
+    Route::post('/editCusOpportunity', [CusOpportunityController::class, 'edit']);
+    Route::post('/updateCusOpportunity', [CusOpportunityController::class, 'update']);
+    Route::post('/deleteCusOpportunity', [CusOpportunityController::class, 'destroy']);
+    Route::post('/get-subcategories', [CusOpportunityController::class, 'getSubcategories'])->name('get.subcategories');
+    Route::get('/getSubCategories', [CusOpportunityController::class, 'getUniqueSubcategories'])->name('get.subCategories');
+
+    //Reports
+    Route::get('/sales-projection', [SalesProjectionController::class, 'index'])->name('sales.projection');
+
+
 });
 
 require __DIR__.'/auth.php';

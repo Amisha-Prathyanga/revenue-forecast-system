@@ -145,6 +145,14 @@
                     @csrf
 
                     <input type="hidden" class="form-control" id="edit_subCategory_id" name="show_subCategory_id">
+
+                    <div class="form-group row mb-3 mx-3">
+                        <label for="categoryName" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-form-label">Category Name</label>
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            <!-- Display the category name in a non-editable text field -->
+                            <input type="text" class="form-control" id="editCategoryName" name="editCategoryName" readonly>
+                        </div>
+                    </div>
                     
                     <div class="form-group row mb-3 mx-3">
                         <label for="empNo" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-form-label">Sub Category Name</label>

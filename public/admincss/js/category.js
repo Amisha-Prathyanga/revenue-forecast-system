@@ -105,3 +105,7 @@ $(document).on("click", "#deleteCategoryButton", function () {
     var categoryId = $(this).attr("data-id");
     deleteCategory(categoryId);
 });
+
+  
+  
+
