@@ -10,6 +10,7 @@
                 <div class="form-group">
                     <label for="accMngr_id" class="mr-2">Select Account Manager:</label>
                     <select name="accMngr_id" id="accMngr_id" class="form-control" onchange="this.form.submit()">
+                        <option value="all" {{ $selectedManager == 'all' ? 'selected' : '' }}>All Account Managers</option>
                         @foreach($accountManagers as $manager)
                             <option value="{{ $manager->id }}" {{ $selectedManager == $manager->id ? 'selected' : '' }}>
                                 {{ $manager->name }}

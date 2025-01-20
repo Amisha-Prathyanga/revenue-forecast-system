@@ -15,19 +15,23 @@ class SalesProjectionController extends Controller
     public function index(Request $request)
     {
         $accountManagers = User::where('usertype', 'accMngr')->get();
-        $selectedManager = $request->input('accMngr_id', $accountManagers->first()->id);
+        $selectedManager = $request->input('accMngr_id', 'all'); 
 
         $year = Carbon::now()->year;
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
             $months[] = Carbon::createFromDate($year, $i, 1);
         }
-
+    
         $categories = Category::with('subCategories')->get();
         
-        $data = CustomerOpportunity::where('accMngr_id', $selectedManager)
-            ->whereYear('date', $year)
-            ->get()
+        // Modify the query based on selected manager
+        $query = CustomerOpportunity::whereYear('date', $year);
+        if ($selectedManager !== 'all') {
+            $query->where('accMngr_id', $selectedManager);
+        }
+        
+        $data = $query->get()
             ->groupBy([
                 'category_id',
                 'sub_category_id',
@@ -100,19 +104,23 @@ class SalesProjectionController extends Controller
     public function export(Request $request)
     {
         $accountManagers = User::where('usertype', 'accMngr')->get();
-        $selectedManager = $request->input('accMngr_id', $accountManagers->first()->id);
+        $selectedManager = $request->input('accMngr_id', 'all'); 
 
         $year = Carbon::now()->year;
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
             $months[] = Carbon::createFromDate($year, $i, 1);
         }
-
+    
         $categories = Category::with('subCategories')->get();
         
-        $data = CustomerOpportunity::where('accMngr_id', $selectedManager)
-            ->whereYear('date', $year)
-            ->get()
+        // Modify the query based on selected manager
+        $query = CustomerOpportunity::whereYear('date', $year);
+        if ($selectedManager !== 'all') {
+            $query->where('accMngr_id', $selectedManager);
+        }
+        
+        $data = $query->get()
             ->groupBy([
                 'category_id',
                 'sub_category_id',
