@@ -73,7 +73,7 @@
 
         <div class="table-responsive mt-4 mb-5">
 
-            <table class="table align-middle table-striped table-bordered table-hover mb-0" id="category_list">
+            <table class="table align-middle table-striped table-bordered table-hover mb-0 table-active" id="category_list">
                 <thead class="text-center">
                     <tr class="text-dark">
                         <th scope="col" class="table-info">Category Name</th>

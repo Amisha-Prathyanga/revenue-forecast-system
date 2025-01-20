@@ -26,15 +26,15 @@
          </a>
 
         <div class="table-responsive">
-            <table class="table table-bordered table-fixed">
+            <table class="table table-bordered table-fixed table-dark table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Category</th>
-                        <th>Sub Products</th>
+                        <th class="table-info">Category</th>
+                        <th class="table-info">Sub Products</th>
                         @foreach($months as $month)
-                            <th>{{ $month->format('F') }}</th>
+                            <th class="table-info">{{ $month->format('F') }}</th>
                         @endforeach
-                        <th>TOTAL</th>
+                        <th class="table-info">TOTAL</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,11 +59,11 @@
                         @endforeach
                     @endforeach
                     <tr class="total-row">
-                        <td colspan="2">Total Revenue</td>
+                        <td class="table-success" colspan="2">Total Revenue</td>
                         @foreach($months as $month)
                             <td>{{ number_format($monthlyTotals['revenue'][$month->format('n')], 2) }}</td>
                         @endforeach
-                        <td>{{ number_format(array_sum($monthlyTotals['revenue']), 2) }}</td>
+                        <td class="table-success">{{ number_format(array_sum($monthlyTotals['revenue']), 2) }}</td>
                     </tr>
 
                     <!-- Foreign Costs Section -->
@@ -87,11 +87,11 @@
                         @endforeach
                     @endforeach
                     <tr class="total-row">
-                        <td colspan="2">Total Foreign Costs</td>
+                        <td class="table-success" colspan="2">Total Foreign Costs</td>
                         @foreach($months as $month)
                             <td>{{ number_format($monthlyTotals['foreign_costs'][$month->format('n')], 2) }}</td>
                         @endforeach
-                        <td>{{ number_format(array_sum($monthlyTotals['foreign_costs']), 2) }}</td>
+                        <td class="table-success">{{ number_format(array_sum($monthlyTotals['foreign_costs']), 2) }}</td>
                     </tr>
 
                     <!-- Local Costs Section -->
@@ -115,20 +115,20 @@
                         @endforeach
                     @endforeach
                     <tr class="total-row">
-                        <td colspan="2">Total Local Costs</td>
+                        <td class="table-success" colspan="2">Total Local Costs</td>
                         @foreach($months as $month)
                             <td>{{ number_format($monthlyTotals['local_costs'][$month->format('n')], 2) }}</td>
                         @endforeach
-                        <td>{{ number_format(array_sum($monthlyTotals['local_costs']), 2) }}</td>
+                        <td class="table-success">{{ number_format(array_sum($monthlyTotals['local_costs']), 2) }}</td>
                     </tr>
 
                     <!-- Gross Revenue -->
                     <tr class="total-row">
-                        <td colspan="2">Gross Revenue</td>
+                        <td class="table-success" colspan="2">Gross Revenue</td>
                         @foreach($months as $month)
                             <td>{{ number_format($grossRevenue[$month->format('n')], 2) }}</td>
                         @endforeach
-                        <td>{{ number_format(array_sum($grossRevenue), 2) }}</td>
+                        <td class="table-success">{{ number_format(array_sum($grossRevenue), 2) }}</td>
                     </tr>
                 </tbody>
             </table>

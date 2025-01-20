@@ -3609,15 +3609,15 @@ pre code {
 .table-fixed thead th {
     position: sticky;
     top: 0;
-    background-color: #fff;
+    /* background-color: #fff; */
     z-index: 1;
 }
 .total-row {
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     font-weight: bold;
 }
 .section-header {
-    background-color: #e9ecef;
+    /* background-color: #e9ecef; */
     font-weight: bold;
 }
 
