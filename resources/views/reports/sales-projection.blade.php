@@ -20,6 +20,11 @@
             </form>
         </div>
 
+        <a href="{{ route('sales.projection.export', ['accMngr_id' => $selectedManager]) }}" 
+            class="btn btn-success ml-2 mb-3">
+             Export to Excel
+         </a>
+
         <div class="table-responsive">
             <table class="table table-bordered table-fixed">
                 <thead>

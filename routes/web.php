@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function () {
     //Reports
     Route::get('/sales-projection', [SalesProjectionController::class, 'index'])->name('sales.projection');
 
+    //Export
+    Route::get('/sales-projection/export', [SalesProjectionController::class, 'export'])->name('sales.projection.export');
+
 
 });
 
