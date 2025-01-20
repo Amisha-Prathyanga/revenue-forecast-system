@@ -3,7 +3,7 @@
 
 @section('content') 
  <div class="container-fluid p-4">
-        <h2>PROJECTED SALES 2025/2024 - MONTHLY BREAKDOWN - TOTAL</h2>
+        <h2>PROJECTED SALES {{ now()->year }}/{{ now()->year - 1 }}  - MONTHLY BREAKDOWN - TOTAL</h2>
         
         <div class="mb-4">
             <form method="GET" action="{{ route('sales.projection') }}" class="form-inline">

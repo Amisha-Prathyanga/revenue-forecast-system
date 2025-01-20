@@ -15,7 +15,7 @@ class SalesProjectionController extends Controller
         $accountManagers = User::where('usertype', 'accMngr')->get();
         $selectedManager = $request->input('accMngr_id', $accountManagers->first()->id);
 
-        $year = 2025;
+        $year = Carbon::now()->year;
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
             $months[] = Carbon::createFromDate($year, $i, 1);

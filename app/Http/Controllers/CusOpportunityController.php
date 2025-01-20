@@ -26,6 +26,7 @@ class CusOpportunityController extends Controller
     $accountManagers = User::all();
     $customerOpportunities = CustomerOpportunity::with(['customer', 'accountManager', 'category', 'subCategory'])
         ->where('status', 1) // Fetch only active opportunities
+        ->where('accMngr_id', $loggedInUserId)
         ->paginate(10);
 
     return view('cusOpportunities.cusOpportunities', compact('categories', 'subCategories', 'customers', 'accountManagers', 'customerOpportunities'));
