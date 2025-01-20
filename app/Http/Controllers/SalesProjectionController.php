@@ -23,10 +23,10 @@ class SalesProjectionController extends Controller
             $months[] = Carbon::createFromDate($year, $i, 1);
         }
     
-        $categories = Category::with('subCategories')->get();
+        $categories = Category::with('subCategories')->where('status', 1)->get();
         
         // Modify the query based on selected manager
-        $query = CustomerOpportunity::whereYear('date', $year);
+        $query = CustomerOpportunity::whereYear('date', $year)->where('status', 1);
         if ($selectedManager !== 'all') {
             $query->where('accMngr_id', $selectedManager);
         }
@@ -58,7 +58,7 @@ class SalesProjectionController extends Controller
                     
                     
                     $revenue = $monthlyAmount->sum('revenue');
-                    $foreignCosts = $monthlyAmount->sum('foreign_costs');
+                    $foreignCosts = $monthlyAmount->sum('foreign_costs')* 300;
                     $localCosts = $monthlyAmount->sum('local_costs');
                     
                     
@@ -112,10 +112,10 @@ class SalesProjectionController extends Controller
             $months[] = Carbon::createFromDate($year, $i, 1);
         }
     
-        $categories = Category::with('subCategories')->get();
+        $categories = Category::with('subCategories')->where('status', 1)->get();
         
         // Modify the query based on selected manager
-        $query = CustomerOpportunity::whereYear('date', $year);
+        $query = CustomerOpportunity::whereYear('date', $year)->where('status', 1);
         if ($selectedManager !== 'all') {
             $query->where('accMngr_id', $selectedManager);
         }
@@ -147,7 +147,7 @@ class SalesProjectionController extends Controller
                     
                     // Sum up revenue and costs
                     $revenue = $monthlyAmount->sum('revenue');
-                    $foreignCosts = $monthlyAmount->sum('foreign_costs');
+                    $foreignCosts = $monthlyAmount->sum('foreign_costs')* 300;
                     $localCosts = $monthlyAmount->sum('local_costs');
                     
                     // Add to monthly totals

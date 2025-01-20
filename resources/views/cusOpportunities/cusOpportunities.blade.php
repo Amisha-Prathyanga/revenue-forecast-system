@@ -73,7 +73,7 @@
                         </div> 
 
                         <div class="form-group row mb-3 mx-3">
-                            <label for="foreign_costs" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-form-label">Foreign Costs</label>
+                            <label for="foreign_costs" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-form-label">Foreign Costs (in Usd)</label>
                             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                                 <input type="number" step="0.01" class="form-control" id="foreign_costs" name="foreign_costs" required>
                             </div>
@@ -125,7 +125,7 @@
                                 <th scope="col" class="table-info">Category</th>
                                 <th scope="col" class="table-info">Sub Category</th>
                                 <th scope="col" class="table-info">Revenue</th>
-                                <th scope="col" class="table-info">Foreign Costs</th>
+                                <th scope="col" class="table-info">Foreign Costs(in Usd)</th>
                                 <th scope="col" class="table-info">Local Costs</th>
                                 <th scope="col" class="table-info">Date</th>
                                 <th scope="col" class="table-info">Action</th>
