@@ -18,7 +18,7 @@ class Supervisor
     {
 
         if(Auth::user()->usertype !== 'supervisor'){
-            return redirect('/');
+            return redirect('/dashboard');
         }
         return $next($request);
     }

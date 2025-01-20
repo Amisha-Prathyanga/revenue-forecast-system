@@ -40,7 +40,7 @@ function editCustomer(id) {
 }
 
 $("#customer_edit_form").submit(function (event) {
-    // stop the default execution
+    
     event.preventDefault();
     var edit_customer_id = $("#edit_customer_id").val().trim();
     var editCusName = $("#editCusName").val().trim();
@@ -80,7 +80,7 @@ $("#customer_edit_form").submit(function (event) {
 });
 
 function deleteCustomer(customerId) {
-    // Show confirmation dialog
+    
     Swal.fire({
         title: "Are you sure?",
         text: "This action will delete the customer. You won't be able to undo this!",
@@ -92,13 +92,13 @@ function deleteCustomer(customerId) {
         cancelButtonText: "Cancel",
     }).then((result) => {
         if (result.isConfirmed) {
-            // Proceed with deletion if confirmed
+            
             $.ajax({
                 url: "/deleteCustomer",
                 type: "POST",
                 data: {
                     id: customerId,
-                    _token: $('meta[name="csrf-token"]').attr("content"), // Add CSRF token
+                    _token: $('meta[name="csrf-token"]').attr("content"), 
                 },
                 success: function (response) {
                     if (response) {
@@ -107,7 +107,7 @@ function deleteCustomer(customerId) {
                             "Customer has been deleted.",
                             "success"
                         ).then(() => {
-                            location.reload(); // Refresh the page after successful deletion
+                            location.reload(); 
                         });
                     } else {
                         Swal.fire(

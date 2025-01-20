@@ -29,7 +29,7 @@ function editCategory(id) {
 }
 
 $("#category_edit_form").submit(function (event) {
-    // stop the default execution
+    
     event.preventDefault();
     var edit_category_id = $("#edit_category_id").val().trim();
     var editCatName = $("#editCatName").val().trim();
@@ -55,7 +55,7 @@ $("#category_edit_form").submit(function (event) {
 });
 
 function deleteCategory(categoryId) {
-    // Show confirmation dialog
+    
     Swal.fire({
         title: "Are you sure?",
         text: "This action will delete the category. You won't be able to undo this!",
@@ -73,7 +73,7 @@ function deleteCategory(categoryId) {
                 type: "POST",
                 data: {
                     id: categoryId,
-                    _token: $('meta[name="csrf-token"]').attr("content"), // Add CSRF token
+                    _token: $('meta[name="csrf-token"]').attr("content"), 
                 },
                 success: function (response) {
                     if (response) {
@@ -82,7 +82,7 @@ function deleteCategory(categoryId) {
                             "Category has been deleted.",
                             "success"
                         ).then(() => {
-                            location.reload(); // Refresh the page after successful deletion
+                            location.reload(); 
                         });
                     } else {
                         Swal.fire(

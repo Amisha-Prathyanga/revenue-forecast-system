@@ -52,19 +52,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/get-subcategories', [CusOpportunityController::class, 'getSubcategories'])->name('get.subcategories');
     Route::get('/getSubCategories', [CusOpportunityController::class, 'getUniqueSubcategories'])->name('get.subCategories');
 
-    //Reports
-    Route::get('/sales-projection', [SalesProjectionController::class, 'index'])->name('sales.projection');
-
-    //Export
-    Route::get('/sales-projection/export', [SalesProjectionController::class, 'export'])->name('sales.projection.export');
+    // Reports - Restricted to supervisors only
+    Route::middleware('supervisor')->group(function () {
+        Route::get('/sales-projection', [SalesProjectionController::class, 'index'])->name('sales.projection');
+        Route::get('/sales-projection/export', [SalesProjectionController::class, 'export'])->name('sales.projection.export');
+    });
 
 
 });
 
 require __DIR__.'/auth.php';
 
-route::get('supervisor/dashboard', [HomeController::class, 'index']) ->
-middleware(['auth', 'supervisor']);
 ;
 
 

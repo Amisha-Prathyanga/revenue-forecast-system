@@ -36,7 +36,7 @@ class SalesProjectionController extends Controller
                 }
             ]);
 
-        // Calculate monthly totals
+        
         $monthlyTotals = [];
         $categoryTotals = [];
         foreach ($months as $month) {
@@ -52,17 +52,17 @@ class SalesProjectionController extends Controller
                     $monthNum = $month->format('n');
                     $monthlyAmount = $monthlyData[$monthNum] ?? collect();
                     
-                    // Sum up revenue and costs
+                    
                     $revenue = $monthlyAmount->sum('revenue');
                     $foreignCosts = $monthlyAmount->sum('foreign_costs');
                     $localCosts = $monthlyAmount->sum('local_costs');
                     
-                    // Add to monthly totals
+                    
                     $monthlyTotals['revenue'][$monthNum] += $revenue;
                     $monthlyTotals['foreign_costs'][$monthNum] += $foreignCosts;
                     $monthlyTotals['local_costs'][$monthNum] += $localCosts;
                     
-                    // Store category totals
+                    
                     if (!isset($categoryTotals[$categoryId][$subCategoryId])) {
                         $categoryTotals[$categoryId][$subCategoryId] = [
                             'revenue' => 0,
@@ -77,7 +77,7 @@ class SalesProjectionController extends Controller
             }
         }
 
-        // Calculate gross revenue
+        
         $grossRevenue = [];
         foreach ($months as $month) {
             $monthNum = $month->format('n');

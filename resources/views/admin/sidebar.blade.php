@@ -37,11 +37,13 @@
                     <li><a href="{{ url('/cusOpportunities') }}">Customer Opportunities</a></li>
                   </ul>
                 </li>
+                @if (auth()->check() && auth()->user()->usertype !== 'accMngr')
                 <li><a href="#reportsDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Reports</a>
                   <ul id="reportsDropdown" class="collapse list-unstyled ">
                     <li><a href="{{ url('/sales-projection') }}">Sales Projection Report</a></li>
                   </ul>
                 </li>
+                @endif
         </ul>
       </nav>
       <!-- Sidebar Navigation end-->

@@ -30,7 +30,6 @@ function editSubCategory(id) {
 }
 
 $("#subCategory_edit_form").submit(function (event) {
-    // stop the default execution
     event.preventDefault();
     var edit_subCategory_id = $("#edit_subCategory_id").val().trim();
     var editSubCatName = $("#editSubCatName").val().trim();
@@ -60,7 +59,7 @@ $("#subCategory_edit_form").submit(function (event) {
 });
 
 function deleteSubCategory(categoryId) {
-    // Show confirmation dialog
+    
     Swal.fire({
         title: "Are you sure?",
         text: "This action will delete the sub category. You won't be able to undo this!",
@@ -72,13 +71,13 @@ function deleteSubCategory(categoryId) {
         cancelButtonText: "Cancel",
     }).then((result) => {
         if (result.isConfirmed) {
-            // Proceed with deletion if confirmed
+            
             $.ajax({
                 url: "/deleteSubCategory",
                 type: "POST",
                 data: {
                     id: categoryId,
-                    _token: $('meta[name="csrf-token"]').attr("content"), // Add CSRF token
+                    _token: $('meta[name="csrf-token"]').attr("content"), 
                 },
                 success: function (response) {
                     if (response) {
@@ -87,7 +86,7 @@ function deleteSubCategory(categoryId) {
                             "Sub Category has been deleted.",
                             "success"
                         ).then(() => {
-                            location.reload(); // Refresh the page after successful deletion
+                            location.reload(); 
                         });
                     } else {
                         Swal.fire(

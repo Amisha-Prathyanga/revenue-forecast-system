@@ -12,18 +12,18 @@ class CustomerController extends Controller
 {
     public function index()
     {
-         // Get the logged-in user
+        
     $user = auth()->user();
     
-    // Check if the logged-in user is an Account Manager
+    
     if ($user->usertype === 'accMngr') {
-        // Fetch only the customers added by the logged-in Account Manager
+        
         $customers = Customer::with('accountManager')
                              ->where('status', 1)
-                             ->where('accMngr_id', $user->id) // Filter by the logged-in user's ID
+                             ->where('accMngr_id', $user->id) 
                              ->paginate(10);
     } else {
-        // Supervisors can see all customers
+        
         $customers = Customer::with('accountManager')
                              ->where('status', 1)
                              ->paginate(10);

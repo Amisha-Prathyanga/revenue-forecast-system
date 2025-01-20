@@ -20,20 +20,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="{{ asset('assets/exceljs/FileSaver.min.js') }}"></script>
-    <script src="{{ asset('assets/exceljs/html2canvas.min.js') }}"></script>
     <script src="{{ asset('assets/exceljs/xlsx.core.min.js') }}"></script>
-    <script src="{{ asset('assets/exceljs/tableExport.js') }}"></script>
 
-    <script src="{{ asset('assets/plugins/chart/chart.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/editableSelect/jquery-editable-select.js') }}"></script>
-    <script src="{{ asset('assets/plugins/lts/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/lts/js/moment-timezone.min.js') }}"></script>
+
     <script src="{{ asset('assets/plugins/lts/js/bootstrap-4.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/table-exports/jquery.base64.js') }}"></script>
-    <script src="{{ asset('assets/plugins/table-exports/html2canvas.js') }}"></script>
-    <script src="{{ asset('assets/plugins/table-exports/sprintf.js') }}"></script>
-    <script src="{{ asset('assets/plugins/table-exports/jspdf.js') }}"></script>
-    <script src="{{ asset('assets/plugins/table-exports/base64.js') }}"></script>

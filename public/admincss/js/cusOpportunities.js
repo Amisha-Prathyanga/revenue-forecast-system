@@ -7,36 +7,36 @@ $.ajaxSetup({
 function editCustomerOpportunity(id) {
     $.ajax({
         type: "post",
-        url: "/editCusOpportunity", // Update endpoint for editing CustomerOpportunity
+        url: "/editCusOpportunity", 
         dataType: "json",
         data: {
             id: id,
         },
         success: function (data) {
-            // Populate modal with opportunity data
+            
             $("#edit_opportunity_id").val(data["id"]);
             $("#editCustomerId").val(data["customer_id"]);
             $("#editAccMngrId").val(data["accMngr_id"]);
-            $("#editCustomerName").val(data["customer_name"]); // Read-only customer name
-            $("#editAccountManagerName").val(data["account_manager_name"]); // Read-only account manager
+            $("#editCustomerName").val(data["customer_name"]); 
+            $("#editAccountManagerName").val(data["account_manager_name"]); 
             $("#editCategory").val(data["category_id"]);
             $("#editSubCategory").val(data["sub_category_id"]);
-            $("#editCategoryName").val(data["category_name"]); // Read-only category name
-            $("#editSubCategoryName").val(data["sub_category_name"]); // Read-only subcategory name
+            $("#editCategoryName").val(data["category_name"]); 
+            $("#editSubCategoryName").val(data["sub_category_name"]); 
             $("#editRevenue").val(data["revenue"]);
             $("#editForeignCosts").val(data["foreign_costs"]);
             $("#editLocalCosts").val(data["local_costs"]);
             $("#editDate").val(data["date"]);
 
-            // Set current category in the select
+            
             $("#editCategory").val(data["category_id"]);
 
-            // Fetch sub-categories for the selected category and set the current sub-category
+            
             loadSubCategories(data["category_id"], data["sub_category_id"]);
 
             $("#deleteCustomerOpportunityButton").attr("data-id", data["id"]);
 
-            // Show the modal
+            
             $("#customerOpportunityEditModal").modal("show");
         },
         error: function (error) {
@@ -49,13 +49,13 @@ function editCustomerOpportunity(id) {
 function loadSubCategories(categoryId, selectedSubCategoryId) {
     $.ajax({
         type: "GET",
-        url: "/getSubCategories", // Endpoint to get subcategories based on categoryId
+        url: "/getSubCategories", 
         data: {
             category_id: categoryId,
         },
         success: function (subCategories) {
             var subCategorySelect = $("#editSubCategory");
-            subCategorySelect.empty(); // Clear existing options
+            subCategorySelect.empty(); 
             subCategorySelect.append(
                 '<option value="" disabled selected>Select Sub Category</option>'
             );
@@ -82,18 +82,18 @@ function loadSubCategories(categoryId, selectedSubCategoryId) {
 }
 
 $("#customerOpportunity_edit_form").submit(function (event) {
-    // Stop the default execution
+    
     event.preventDefault();
 
-    // Get the current CSRF token
+    
     var token = $('meta[name="csrf-token"]').attr("content");
 
-    // Collect form data
+    
     var formData = {
         _token: token,
         edit_opportunity_id: $("#edit_opportunity_id").val().trim(),
-        customer_id: $("#editCustomerId").val(), // We need to add this hidden field
-        accMngr_id: $("#editAccMngrId").val(), // We need to add this hidden field
+        customer_id: $("#editCustomerId").val(), 
+        accMngr_id: $("#editAccMngrId").val(), 
         category_id: $("#editCategory").val(),
         sub_category_id: $("#editSubCategory").val(),
         revenue: $("#editRevenue").val().trim(),
@@ -104,13 +104,13 @@ $("#customerOpportunity_edit_form").submit(function (event) {
 
     $.ajax({
         type: "post",
-        url: "/updateCusOpportunity", // Update endpoint for updating CustomerOpportunity
+        url: "/updateCusOpportunity", 
         dataType: "json",
         data: formData,
         success: function (data) {
             $("#customerOpportunityEditModal").modal("hide");
             
-            // Show SweetAlert before reload
+            
             Swal.fire({
                 icon: 'success',
                 title: 'Saved!',
@@ -122,7 +122,7 @@ $("#customerOpportunity_edit_form").submit(function (event) {
             });
         },
         error: function (xhr, status, error) {
-            // Check if response is HTML (likely a redirect to login page)
+            
             if (xhr.responseText.indexOf("<!DOCTYPE html>") !== -1) {
                 swal_alert(
                     "error",
@@ -137,7 +137,7 @@ $("#customerOpportunity_edit_form").submit(function (event) {
 });
 
 function deleteCustomerOpportunity(opportunityId) {
-    // Show confirmation dialog
+    
     Swal.fire({
         title: "Are you sure?",
         text: "This action will delete the customer opportunity. You won't be able to undo this!",
@@ -149,13 +149,13 @@ function deleteCustomerOpportunity(opportunityId) {
         cancelButtonText: "Cancel",
     }).then((result) => {
         if (result.isConfirmed) {
-            // Proceed with deletion if confirmed
+            
             $.ajax({
-                url: "/deleteCusOpportunity", // Endpoint for deleting CustomerOpportunity
+                url: "/deleteCusOpportunity", 
                 type: "POST",
                 data: {
                     id: opportunityId,
-                    _token: $('meta[name="csrf-token"]').attr("content"), // Add CSRF token
+                    _token: $('meta[name="csrf-token"]').attr("content"), 
                 },
                 success: function (response) {
                     if (response) {
@@ -164,7 +164,7 @@ function deleteCustomerOpportunity(opportunityId) {
                             "Customer Opportunity has been deleted.",
                             "success"
                         ).then(() => {
-                            location.reload(); // Refresh the page after successful deletion
+                            location.reload();
                         });
                     } else {
                         Swal.fire(
@@ -183,7 +183,7 @@ function deleteCustomerOpportunity(opportunityId) {
     });
 }
 
-// Bind delete button click event
+
 $(document).on("click", "#deleteCustomerOpportunityButton", function () {
     var opportunityId = $(this).attr("data-id");
     deleteCustomerOpportunity(opportunityId);
@@ -195,7 +195,7 @@ $(document).ready(function () {
 
         if (categoryId) {
             $.ajax({
-                url: getSubcategoriesUrl, // Use the global variable
+                url: getSubcategoriesUrl, 
                 type: "POST",
                 data: {
                     category_id: categoryId,
@@ -231,11 +231,11 @@ $(document).ready(function () {
         }
     });
 
-    // New event listener for edit modal
+    
     $("#editCategory").on("change", function () {
         var categoryId = $(this).val();
         if (categoryId) {
-            // Call loadSubCategories with only categoryId since this is a new selection
+            
             loadSubCategories(categoryId);
         } else {
             $("#editSubCategory")

@@ -21,11 +21,11 @@ class CusOpportunityController extends Controller
     $categories = Category::where('status', 1)->get();
     $subCategories = SubCategory::where('status', 1)->get();
     $customers = Customer::where('status', 1)
-        ->where('accMngr_id', $loggedInUserId) // Fetch customers for the logged-in user
+        ->where('accMngr_id', $loggedInUserId) 
         ->get();
     $accountManagers = User::all();
     $customerOpportunities = CustomerOpportunity::with(['customer', 'accountManager', 'category', 'subCategory'])
-        ->where('status', 1) // Fetch only active opportunities
+        ->where('status', 1) 
         ->where('accMngr_id', $loggedInUserId)
         ->paginate(10);
 
@@ -128,8 +128,8 @@ class CusOpportunityController extends Controller
 
     $opportunity = CustomerOpportunity::find($req->id);
     if ($opportunity) {
-        $opportunity->status = 0; // Set the status to 0 instead of deleting
-        $opportunity->save(); // Update the record
+        $opportunity->status = 0; 
+        $opportunity->save(); 
         return response()->json(['success' => 'Customer Opportunity status set to inactive']);
     }
 
@@ -141,7 +141,7 @@ class CusOpportunityController extends Controller
     public function getSubcategories(Request $request)
     {
         $subcategories = SubCategory::where('category_id', $request->category_id)
-            ->where('status', 1) // If you only want active subcategories
+            ->where('status', 1) 
             ->get();
 
         return response()->json($subcategories);
