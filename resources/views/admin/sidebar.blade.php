@@ -44,6 +44,11 @@
                   </ul>
                 </li>
                 @endif
+                <li><a href="#IndPubDamageDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Ind & Pub Damage </a>
+                  <ul id="IndPubDamageDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ url('/indPubDamage') }}">Damage data</a></li>
+                  </ul>
+                </li>
         </ul>
       </nav>
       <!-- Sidebar Navigation end-->

@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\CusOpportunityController;
 use App\Http\Controllers\SalesProjectionController;
+use App\Http\Controllers\ArcGISServiceController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -57,6 +58,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/sales-projection', [SalesProjectionController::class, 'index'])->name('sales.projection');
         Route::get('/sales-projection/export', [SalesProjectionController::class, 'export'])->name('sales.projection.export');
     });
+
+    Route::get('/indPubDamage', [ArcGISServiceController::class, 'fetchData'])->name('indPubDamage');
+    Route::post('/approval/{objectid}', [ArcGISServiceController::class, 'updateApproval'])->name('update.approval');
 
 
 });
