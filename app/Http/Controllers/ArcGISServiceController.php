@@ -12,57 +12,66 @@ class ArcGISServiceController extends Controller
 {
     public function fetchData(ArcGISService $arcGISService) {
         // Fetch data from API
-        $apiData = $arcGISService->fetchData([]); // Fetch all data
+        $apiData = $arcGISService->fetchData([]);
     
         // Get approvals from the database, keyed by objectid
         $approvalData = Approval::all()->keyBy('objectid');
     
+        // Get current user
+        $user = auth()->user();
+        
         // Merge approval status with the API data
         $mergedData = collect($apiData)->map(function ($item) use ($approvalData) {
-            $objectid = $item['attributes']['objectid']; // Accessing objectid from attributes
-    
-            // Retrieve approval status from the database using objectid
+            $objectid = $item['attributes']['objectid'];
             $approval = $approvalData->get($objectid);
-    
-            // If no approval data exists, initialize default approval status
+            
             $item['ds_approved'] = $approval->ds_approved ?? false;
             $item['district_approved'] = $approval->district_approved ?? false;
             $item['national_approved'] = $approval->national_approved ?? false;
-    
+            
             return $item;
         });
     
-        // Log merged data to see it
-        \Log::info('Merged Data:', $mergedData->toArray());
+        // Filter by user role and DSD
+        $userRole = $user->usertype;
+        $userDSD = $user->dsd_n;
     
-        // Filter the data based on the approval flow
-        $userRole = auth()->user()->usertype;
+        // First filter by DSD if user has one assigned (except for National users)
+        if ($userDSD && $userRole !== 'National') {
+            $mergedData = $mergedData->filter(function ($item) use ($userDSD) {
+                return $item['attributes']['DSD_N'] === $userDSD;
+            });
+        }
     
+        // Then apply role-based filtering
         if ($userRole === 'DS') {
-            // DS can see everything, so no filtering needed
             $visibleData = $mergedData;
         } elseif ($userRole === 'District') {
-            // District can only see data approved by DS
             $visibleData = $mergedData->filter(function ($item) {
                 return $item['ds_approved'] == true;
             });
         } elseif ($userRole === 'National') {
-            // National can only see data approved by District
             $visibleData = $mergedData->filter(function ($item) {
                 return $item['district_approved'] == true;
             });
         } else {
-            $visibleData = collect(); // If no valid user role, no data should be shown
+            $visibleData = collect();
         }
     
-        // Log filtered data
-        \Log::info('Filtered Data:', $visibleData->toArray());
-        \Log::info('User Role:', [auth()->user()->usertype]);
-    
-        // Pass the filtered data to the view
-        return view('arcGis.indPubDamage', ['mergedData' => $visibleData]);
+        return view('arcGis.indPubDamage', [
+            'mergedData' => $visibleData,
+            'mapData' => $visibleData->map(function ($item) {
+                return [
+                    'id' => $item['attributes']['objectid'],
+                    'x' => number_format((float)$item['geometry']['x'], 10, '.', ''), // Ensure full precision
+                    'y' => number_format((float)$item['geometry']['y'], 10, '.', ''), // Ensure full precisiontem['geometry']['y'],
+                    'district' => $item['attributes']['DISTRICT_N'],
+                    'dsd' => $item['attributes']['DSD_N'],
+                    'description' => $item['attributes']['disas_event'],
+                ];
+            })->values()->toArray()
+        ]);
     }
-
     
 
     

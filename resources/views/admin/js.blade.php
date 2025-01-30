@@ -25,3 +25,4 @@
 
     <script src="{{ asset('assets/plugins/lts/js/bootstrap-4.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/table-exports/jquery.base64.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
